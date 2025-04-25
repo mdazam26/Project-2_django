@@ -20,17 +20,23 @@ def signup(request):
         mobile = request.POST.get('mobile')
         address = request.POST.get('address')
 
-        if (Customer.objects.filter(username = username).exists()):
-            return HttpResponse("Username already exits")
+        # if (Customer.objects.filter(username = username).exists()):
+        #     return HttpResponse("Username already exits")
 
-            
-        Customer.objects.create(
+        try:
+            Customer.objects.get(username = username)
+            return HttpResponse("Duplicate username!")
+        except:
+            Customer.objects.create(
             username = username,
             password = password,
             email = email,
             mobile = mobile,
             address = address,
         )
+
+            
+        
     return render(request, 'delivery/signin.html')
 
 def signin(request):
