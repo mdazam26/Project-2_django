@@ -57,3 +57,7 @@ def signin(request):
     except Customer.DoesNotExist:
         return render(request, 'delivery/fail.html')
 
+
+
+def open_add_restaurant(request):
+    return render(request, 'delivery/add_restaurant.html')
