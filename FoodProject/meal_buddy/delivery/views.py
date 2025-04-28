@@ -1,6 +1,6 @@
 from django.shortcuts import render # type: ignore
 from django.http import HttpResponse # type: ignore
-from .models import Customer
+from .models import Customer, Restaurant
 # Create your views here.
 
 def index(request):
@@ -61,3 +61,29 @@ def signin(request):
 
 def open_add_restaurant(request):
     return render(request, 'delivery/add_restaurant.html')
+
+def add_restaurant(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        picture = request.POST.get('picture')
+        cuisine = request.POST.get('cuisine')
+        rating = request.POST.get('rating')
+
+        try:
+            Restaurant.objects.get(name = name)
+            return HttpResponse('Duplicate Restaurant')
+        except:
+            Restaurant.objects.create(
+                name = name,
+                picture = picture,
+                cuisine = cuisine,
+                rating = rating,
+            )
+    
+    return render(request, 'delivery/admin_home.html')
+
+
+
+def open_show_restaurant(request):
+    restaurantList = Restaurant.objects.all()
+    return render(request, 'delivery/show_restaurant.html', {'restaurantList': restaurantList})

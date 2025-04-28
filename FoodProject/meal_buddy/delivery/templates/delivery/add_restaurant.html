@@ -8,20 +8,27 @@
   <body>
     <h1>Welcome to add restaurant</h1>
 
-    <hr>
+    <hr />
 
-    <form action="">
-        <label for="restaurent_name">Restaurant Name:</label> <br>
-        <input type="text" name="restaurent_name" id=""> <br> <br>
+    <form action="{% url 'add_restaurant' %}" method="POST">
+      {% csrf_token %}
+      <label for="name">Restaurant Name:</label> <br />
+      <input type="text" name="name" id="" /> <br />
+      <br />
 
-        <label for="picture_url">Picture URL:</label> <br>
-        <input type="text" name="picture_url" id=""> <br><br>
+      <label for="picture">Picture URL:</label> <br />
+      <input type="text" name="picture" id="" /> <br /><br />
 
-        <label for="cuisine">CUISINE: </label> <br>
-        <input type="text" name="cuisine" id=""> <br> <br>
+      <label for="cuisine">CUISINE: </label> <br />
+      <input type="text" name="cuisine" id="" /> <br />
+      <br />
 
-        <label for="rating">Rating: </label> <br> <br>
-        <input type="number" name="rating" id="" min="0" max="5" step="0.5">
+      <label for="rating">Rating: </label> <br />
+      <br />
+      <input type="number" name="rating" id="" min="0" max="5" step="0.5" />
+      <br /><br />
+
+      <button type="submit">ADD RESTAURANT</button>
     </form>
   </body>
 </html>

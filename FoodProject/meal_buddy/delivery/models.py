@@ -9,8 +9,8 @@ class Customer(models.Model):
     address = models.CharField(max_length=50)
 
 
-class Restaurent(models.Model):
-    restaurent_name = models.CharField(max_length=20)
-    picture_url = models.CharField(max_length=200, default="https://tse2.mm.bing.net/th/id/OIP.3JuA0-BIEyyCceG24Arr3gHaE8?rs=1&pid=ImgDetMain")
+class Restaurant(models.Model):
+    name = models.CharField(max_length=20)
+    picture = models.CharField(max_length=200, default="https://tse2.mm.bing.net/th/id/OIP.3JuA0-BIEyyCceG24Arr3gHaE8?rs=1&pid=ImgDetMain")
     cuisine = models.CharField(max_length=200)
     rating = models.FloatField()
