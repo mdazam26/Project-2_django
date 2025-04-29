@@ -15,6 +15,7 @@
           <th>Picture</th>
           <th>Cuisine</th>
           <th>Rating</th>
+          <th>Operations</th>
         </tr>
       </thead>
       <tbody>
@@ -28,11 +29,17 @@
               srcset=""
               width="80%"
               height="auto"
-              
             />
           </td>
           <td>{{ r.cuisine }}</td>
           <td>{{ r.rating }}</td>
+          <td>
+            <a href="open_update_restaurant/">Update Restaurant info</a>
+            <br />
+            <a href="#">Update Menu</a>
+            <br />
+            <a href="#">Delete Restaurant</a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
