@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>update menu</h1>
+
+    <h1>Add menu item</h1>
+    <form action="">
+      {% csrf_token %}
+      <label for="name">Item Name</label><br />
+      <input type="text" id="name" name="name" required /> <br /><br />
+
+      <label for="description">Description</label><br />
+      <textarea
+        name="description"
+        id="description"
+        name="description"
+      ></textarea>
+      <br /><br />
+
+      <label for="price">Price</label> <br />
+      <input type="number" id="price" name="price" step="0.01" required />
+      <br />
+      <br />
+
+      <label for="is_veg">Vegetarian</label> <br />
+      <input type="checkbox" name="is_veg" id="is_veg" /> <br />
+      <br />
+
+      <label for="picture">Image Url</label> <br />
+      <input type="url" id="picture" name="picture" /> <br />
+      <br />
+
+      <button type="submit">Add Item</button>
+    </form>
+  </body>
+</html>
