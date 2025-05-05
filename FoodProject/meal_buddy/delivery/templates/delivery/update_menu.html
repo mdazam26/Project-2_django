@@ -9,7 +9,7 @@
     <h1>update menu</h1>
 
     <h1>Add menu item</h1>
-    <form action="">
+    <form action="{% url 'update_menu' restaurant.id %}" method="post">
       {% csrf_token %}
       <label for="name">Item Name</label><br />
       <input type="text" id="name" name="name" required /> <br /><br />
