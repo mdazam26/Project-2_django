@@ -1,6 +1,6 @@
 from django.shortcuts import render , get_object_or_404 # type: ignore
 from django.http import HttpResponse  # type: ignore 
-from .models import Customer, Restaurant
+from .models import Customer, Restaurant, Items
 
 # Create your views here.
 
@@ -41,6 +41,7 @@ def signup(request):
     return render(request, 'delivery/signin.html')
 
 def signin(request):
+    restaurantList = Restaurant.objects.all()
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -53,7 +54,7 @@ def signin(request):
         if username == 'admin':
             return render(request, 'delivery/admin_home.html')
         else:
-            return render(request, 'delivery/customer_home.html')
+            return render(request, 'delivery/customer_home.html', {'restaurantList' : restaurantList , 'username' : username} )
 
     except Customer.DoesNotExist:
         return render(request, 'delivery/fail.html')
@@ -128,8 +129,38 @@ def delete_restaurant(request, restaurant_id):
 
 def open_update_menu(request, restaurant_id):
     restaurant = Restaurant.objects.get(id = restaurant_id)
-    return render(request, 'delivery/update_menu.html', {'restaurant' : restaurant})
+    # itemList = Items.objects.all()
+    itemList = restaurant.items.all()
+    return render(request, 'delivery/update_menu.html', {'restaurant' : restaurant , 'itemList': itemList})
 
 def update_menu(request, restaurant_id):
     restaurant = Restaurant.objects.get( id = restaurant_id)
-    return HttpResponse('update menu')
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        vegeterian = request.POST.get('is_veg') == 'on'
+        picture = request.POST.get('picture')
+    
+        try:
+            Items.objects.get(name = name)
+            return HttpResponse("duplicate name")
+        except:
+            Items.objects.create(
+                restaurant = restaurant,
+                name = name,
+                description = description,
+                price = price,
+                vegeterian = vegeterian,
+                picture = picture,
+            )
+    return render(request, 'delivery/admin_home.html')
+
+def view_menu(request, restaurant_id, username):
+    restaurant = Restaurant.objects.get(id = restaurant_id)
+    # itemList = Items.objects.all()
+    itemList = restaurant.items.all()
+    return render(request, 'delivery/customer_menu.html', {'restaurant' : restaurant , 'itemList': itemList, 'username': username})
+
+def add_to_cart(request, item_id, username):
+    return HttpResponse("add to card logic")

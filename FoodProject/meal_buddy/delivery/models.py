@@ -23,3 +23,10 @@ class Items(models.Model):
     vegeterian = models.BooleanField(default=True)
     picture = models.CharField(max_length=400, default="https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg")
     
+
+class Cart(models.Model):
+    customer = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name= 'cart')
+    items = models.ManyToManyField("Items", related_name= 'carts')
+
+    def total_price(self):
+        return sum(item.price for item in self.items.all())

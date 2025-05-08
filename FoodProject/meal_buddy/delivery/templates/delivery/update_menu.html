@@ -6,7 +6,33 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>update menu</h1>
+    <h1>show current menu</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Item name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Vegetarian</th>
+          <th>Picture</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in itemList %}
+        <tr>
+          <td>{{i.name}}</td>
+          <td>{{i.description}}</td>
+          <td>{{i.price}}</td>
+          <td>{{i.vegeterian}}</td>
+          <td><img src="{{i.picture}}" alt="" width="80%" height="auto"></td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+   
 
     <h1>Add menu item</h1>
     <form action="{% url 'update_menu' restaurant.id %}" method="post">

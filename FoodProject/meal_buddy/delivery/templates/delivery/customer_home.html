@@ -6,6 +6,43 @@
     <title>Customer Home</title>
 </head>
 <body>
-    <h3>Welcom to Cutomer HOME</h3>
+    <h3>Welcom to {{username}} </h3>
+
+    <table border="1" width="80%">
+        <thead>
+          <tr>
+            <th>Restaurant Name</th>
+            <th>Picture</th>
+            <th>Cuisine</th>
+            <th>Rating</th>
+            <th>Menu</th>
+            <!-- <th></th> -->
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in restaurantList %}
+          <tr>
+            <td>{{ r.name }}</td>
+            <td>
+              <img
+                src="{{r.picture}}"
+                alt=""
+                srcset=""
+                width="80%"
+                height="auto"
+              />
+            </td>
+            <td>{{ r.cuisine }}</td>
+            <td>{{ r.rating }}</td>
+            <td>
+              <a href="{% url 'view_menu' r.id username %}">View menu</a>
+            </td>
+            <!-- <td>
+              <a href="#">Add to cart</a>
+            </td> -->
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 </body>
 </html>
